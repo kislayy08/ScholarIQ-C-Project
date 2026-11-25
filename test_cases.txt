@@ -1,0 +1,36 @@
+# ScholarIQ — Sample Test Cases
+  
+**Run:** `./scholariq --no-color`
+
+| ID | Test scenario | Input / setup | Expected result | Observed output / status |
+|---|---|---|---|---|
+| TC-01 | Normal exit | Main menu: `0` | Program terminates normally | `THANK YOU FOR USING SCHOLARIQ` — **PASS** |
+| TC-02 | Invalid menu selection | Main menu: `9`, then `0` | Invalid choice rejected; user prompted again | `[ERROR] Invalid input. Enter a whole number from 0 to 2.` — **PASS** |
+| TC-03 | Admin login and demo load | Main menu `1`, ID `admin`, PIN `2468`, admin menu `9`, then `0`, `0` | Load ten students and their assessment records; logout succeeds | `[OK] Loaded 10 students with 27 assessment records.` and `[INFO] Admin logged out.` — **PASS** |
+| TC-04 | Student registration | Admin → Student Management → Register; new roll `111`, valid name `Rahul Verma` | A new student record is created | **NOT RUN** |
+| TC-05 | Duplicate roll number | Load demo data; attempt to register roll `101` again | Duplicate roll is rejected | **NOT RUN** |
+| TC-06 | Invalid subject marks | Enter `150` for a subject in marks entry | Input rejected; valid range is 0–100 | **NOT RUN** |
+| TC-07 | Result calculation: pass | Five marks: `85, 72, 78, 91, 74` | Total `400/500`; percentage `80.00%`; PASS (all subjects ≥40) | **NOT RUN** |
+| TC-08 | Overall percentage high, subject failed | Five marks: `90, 92, 88, 95, 35` | Total `400/500`; percentage `80.00%`; FAIL due to English `35` | **NOT RUN** |
+| TC-09 | Academic risk: multiple failures | Five marks: `80, 35, 75, 90, 30` | Two failed subjects; **Critical Support** | **NOT RUN** |
+| TC-10 | Target marks and What-If behavior | Current total `340/500`, target `80%`; separately simulate English `35 → 40` for a failed student | Target needs `400` total / `60` extra marks; What-If must not overwrite stored marks | **NOT RUN** |
+
+## Evidence from executed tests
+
+```text
+TC-01 — Exit
+THANK YOU FOR USING SCHOLARIQ
+
+TC-02 — Invalid main-menu input
+[ERROR] Invalid input. Enter a whole number from 0 to 2.
+
+TC-03 — Admin demo data load
+[OK] Loaded 10 students with 27 assessment records.
+[INFO] Admin logged out.
+```
+
+## Remaining verification
+
+Run TC-04 through TC-10 interactively on the final submitted build. Record the exact terminal output and replace **NOT RUN** with **PASS** or **FAIL** based on the observed result. Do not mark tests passed without execution.
+
+**Scope:** These cases test the C terminal program, not the separate ScholarIQ web interface.
